@@ -12,6 +12,7 @@ class Anggota extends CI_Controller
 		$this->load->model('anggota_model', 'anggota');
 	}
 
+
 	public function web_developer()
 	{
 		$data['title']	= 'Web Developer';
@@ -50,6 +51,28 @@ class Anggota extends CI_Controller
 
 	public function add()
 	{
+
+		// $this->load->library('form_validation');
+		// $this->form_validation->set_rules('no', 'No',);
+		// $this->form_validation->set_rules('name', 'Name', 'required');
+		// $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		// $this->form_validation->set_rules('password', 'Password', 'required');
+		// if ($this->form_validation->run()) {
+		// 	$array = array(
+		// 		'success' => '<div class="alert-sucess">Berhasil</div>'
+		// 	);
+		// } else {
+		// 	$array = array(
+		// 		'error' => true,
+		// 		'no_error' => form_error('no'),
+		// 		'name_error' => form_error('name'),
+		// 		'email_error' => form_error('email'),
+		// 		'password_error' => form_error('password'),
+		// 	);
+		// }
+
+		// echo json_encode($array);
+
 		$this->form_validation->set_rules('no_employee', 'No Karyawan', 'required|trim|is_unique[users.no_employee]', [
 			'required'  => 'No karyawan tidak boleh kosong.',
 			'is_unique' => 'No karyawan sudah terdaftar.'
@@ -85,15 +108,15 @@ class Anggota extends CI_Controller
 			$this->anggota->insertUser($data);
 			$this->session->set_flashdata('message', 'Data anggota berhasil ditambahkan.');
 
-			if ($data['position_id'] == 1) {
-				redirect(base_url('anggota/web_developer'));
-			} else if ($data['position_id'] == 2) {
-				redirect(base_url('anggota/software_engineer'));
-			} else if ($data['position_id'] == 3) {
-				redirect(base_url('anggota/mobile_developer'));
-			} else if ($data['position_id'] == 4) {
-				redirect(base_url('anggota/manager'));
-			}
+			// if ($data['position_id'] == 1) {
+			// 	redirect(base_url('anggota/web_developer'));
+			// } else if ($data['position_id'] == 2) {
+			// 	redirect(base_url('anggota/software_engineer'));
+			// } else if ($data['position_id'] == 3) {
+			// 	redirect(base_url('anggota/mobile_developer'));
+			// } else if ($data['position_id'] == 4) {
+			// 	redirect(base_url('anggota/manager'));
+			// }
 		}
 	}
 

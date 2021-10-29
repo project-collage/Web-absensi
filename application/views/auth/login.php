@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <link rel="icon" href="<?= site_url('image/default.png') ?>" type="image/gif">
 
-  <title>Puskesmas - Login</title>
+  <title>IT Company - Login</title>
 
   <!-- Custom fonts for this template-->
   <link href="<?= base_url('assets/') ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,17 +46,20 @@
 
                   <?= $this->session->flashdata('message') ?>
 
-                  <form action="<?= base_url('auth') ?>" method="post" class="user">
+                  <span id="failed-message"></span>
+                  <form action="<?= base_url('auth') ?>" method="post" class="user" id="login-form">
                     <div class="form-group">
                       <input type="email" class="form-control form-control-user" style="margin-top: 5vh;" id="exampleInputEmail" placeholder="Masukkan email..." name="email">
                       <?= form_error('email', '<small class="text-danger ml-3 mt-1">', '</small>'); ?>
+                      <span id="email-error" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" style="margin-top: 5vh;" id="exampleInputPassword" placeholder="Masukkan password..." name="password">
                       <?= form_error('password', '<small class="text-danger ml-3 mt-1">', '</small>'); ?>
+                      <span id="password-error" class="text-danger"></span>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-user btn-block" style="margin-top: 10vh;">
+                    <button type="submit" class="btn btn-primary btn-user btn-block" id="submit" style="margin-top: 10vh;">
                       Login
                     </button>
                   </form>
@@ -81,6 +84,44 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?= base_url('assets/') ?>js/sb-admin-2.min.js"></script>
+
+  <!-- <script>
+    $(document).ready(function() {
+      $('#login-form').on('submit', function(event) {
+        event.preventDefault();
+        $.ajax({
+          url: "<?= base_url(); ?>auth/loginajax",
+          method: "POST",
+          data: $(this).serialize(),
+          dataType: 'json',
+          beforeSend: function() {
+            $('#submit').attr('disabled', 'disabled');
+          },
+          success: function(data) {
+            if (data.error) {
+              if (data.email - error != '') {
+                $('#email-error').html(data.email - error);
+              } else {
+                $('#email-error').html('');
+              }
+              if (data.password - error != '') {
+                $('#password-error').html(data.password - error);
+              } else {
+                $('#password-error').html('');
+              }
+            }
+            if (data.success) {
+              $('#failed-message').html(data.success);
+              $('#email-error').html('');
+              $('#password-error').html('');
+              $('#login-form')[0].reset();
+            }
+            $('#submit').attr('disabled', false);
+          }
+        })
+      })
+    })
+  </script> -->
 
 </body>
 
